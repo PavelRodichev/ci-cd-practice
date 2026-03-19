@@ -15,7 +15,7 @@ public class MyController {
 
     @GetMapping("/health")
     public String health() {
-        return "OK";
+        return "Status:OK";
     }
 
 
