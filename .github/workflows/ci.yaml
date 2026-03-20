@@ -7,7 +7,7 @@ on:
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
-
+    environment: Docker
     steps:
       - uses: actions/checkout@v4
 
@@ -21,6 +21,9 @@ jobs:
         run: |
           mvn compile jib:build \
             -Dimage=docker.io/${{ secrets.DOCKER_USERNAME }}/ci-cd-practice:latest \
+            -Djib.to.auth.username=${{ secrets.DOCKER_USERNAME }} \
+            -Djib.to.auth.password=${{ secrets.DOCKER_PASSWORD }} \
             -DskipTests
         env:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
